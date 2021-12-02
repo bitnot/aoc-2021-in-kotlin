@@ -1,25 +1,21 @@
 fun main() {
     fun countIncreasingDepths(depths: List<Long>) = depths
-        .zip(depths.drop(1))
-        .fold(0) { acc, t ->
-            acc + if (t.first < t.second) 1 else 0
-        }
+        .zipWithNext()
+        .count { (current, next) -> next > current }
 
     fun part1(input: List<String>): Int {
         val depths = input.map { it.toLong() }
         return countIncreasingDepths(depths)
     }
 
-    fun slidingSums(nums: List<Long>, window: Int): List<Long> = nums.windowed(window).map { it.sum() }
-
     fun part2(input: List<String>): Int {
         val depths = input.map { it.toLong() }
-        return countIncreasingDepths(slidingSums(depths, 3))
+        return countIncreasingDepths(depths.windowed(3).map { it.sum() })
     }
 
-    check(part1(readInput("Day01_puzzle1_input1")) == 7)
-    println(part1(readInput("Day01_puzzle1_input2")))
+    check(part1(readInput("Day01_test_input")) == 7)
+    println(part1(readInput("Day01_real_input")))
 
-    check(part2(readInput("Day01_puzzle1_input1")) == 5)
-    println(part2(readInput("Day01_puzzle1_input2")))
+    check(part2(readInput("Day01_test_input")) == 5)
+    println(part2(readInput("Day01_real_input")))
 }
