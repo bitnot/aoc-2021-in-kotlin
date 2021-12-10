@@ -9,7 +9,8 @@ fun <T> checkEquals(actual: T, expected: T) =
  * Reads lines from the given input txt file.
  */
 fun readInput(name: String) = File("src", "$name.txt").readLines()
-fun readLong(name: String) = readInput(name).map { it.toLong() }
+fun readTestInput(day: Int) = readInput("Day${day.toString().padStart(2, '0')}_test_input")
+fun readInput(day: Int) = readInput("Day${day.toString().padStart(2, '0')}_real_input")
 
 /**
  * Converts string to md5 hash.
