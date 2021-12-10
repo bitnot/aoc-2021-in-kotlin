@@ -2,6 +2,9 @@ import java.io.File
 import java.math.BigInteger
 import java.security.MessageDigest
 
+fun <T> checkEquals(actual: T, expected: T) =
+    check(actual == expected) { "$actual was expected to be $expected" }
+
 /**
  * Reads lines from the given input txt file.
  */
